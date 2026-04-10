@@ -73,13 +73,6 @@ Statistical plots are included in this folder.
   - Claim likelihood across segments
   - Differences by fuel type and transmission
   - Patterns across car age and policyholder age
-
----
-
-## Notes
-- The dashboard  focuses on descriptive analytics.
-- The predictive model focuses on data processing and modeling.
-
 ---
 
 ## Tools Used
@@ -93,4 +86,6 @@ Statistical plots are included in this folder.
 ## Summary
 
 - Claims Dashboard → Business intelligence and visualization  
-- Predictive Analysis → Data processing and predictive modeling  
+- Predictive Analysis → Data processing and predictive modeling
+- The dashboard  focuses on descriptive analytics.
+- The predictive model focuses on data processing and modeling.
