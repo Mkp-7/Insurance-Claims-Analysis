@@ -1,0 +1,107 @@
+# =========================================
+# Insurance Claims Analysis - R Pipeline
+# =========================================
+
+library(randomForest)
+library(RODBC)
+library(ggplot2)
+library(dplyr)
+
+# ----------------------------
+# Load data
+# ----------------------------
+claims_data <- read.csv("train.csv")
+
+# Ensure target variable
+claims_data$is_claim <- as.factor(claims_data$is_claim)
+
+# ----------------------------
+# Feature Engineering (must match SQL)
+# ----------------------------
+claims_data$fuel_type_clean <- ifelse(
+  claims_data$fuel_type %in% c("Petrol", "Diesel"),
+  claims_data$fuel_type,
+  "Other"
+)
+
+claims_data$transmission_clean <- ifelse(
+  claims_data$transmission_type %in% c("Manual", "Automatic"),
+  claims_data$transmission_type,
+  "Other"
+)
+
+# =====================================================
+# 📊 STATISTICAL ANALYSIS (EDA)
+# =====================================================
+
+# Distribution of policyholder age
+ggplot(claims_data, aes(x = age_of_policyholder)) +
+  geom_histogram(binwidth = 0.05) +
+  ggtitle("Policyholder Age Distribution")
+
+# Distribution of car age
+ggplot(claims_data, aes(x = age_of_car)) +
+  geom_histogram(binwidth = 0.05) +
+  ggtitle("Car Age Distribution")
+
+# Claim rate by segment
+ggplot(claims_data, aes(x = segment, fill = is_claim)) +
+  geom_bar(position = "fill") +
+  ggtitle("Claim Rate by Segment")
+
+# Claim rate by fuel type
+ggplot(claims_data, aes(x = fuel_type_clean, fill = is_claim)) +
+  geom_bar(position = "fill") +
+  ggtitle("Claim Rate by Fuel Type")
+
+# =====================================================
+# 🤖 MODELING
+# =====================================================
+
+# Random Forest
+rf_model <- randomForest(
+  is_claim ~ age_of_policyholder + age_of_car + segment +
+    fuel_type_clean + transmission_clean,
+  data = claims_data,
+  ntree = 100,
+  importance = TRUE
+)
+
+claims_data$pred_rf <- predict(rf_model, type = "prob")[,2]
+
+# Logistic Regression
+logit_model <- glm(
+  is_claim ~ age_of_policyholder + age_of_car + segment +
+    fuel_type_clean + transmission_clean,
+  data = claims_data,
+  family = binomial
+)
+
+claims_data$pred_logit <- predict(logit_model, type = "response")
+
+# Model summaries
+summary(logit_model)
+importance(rf_model)
+
+# =====================================================
+# 🔗 EXPORT TO SQL SERVER
+# =====================================================
+
+conn <- odbcDriverConnect(
+  "Driver={SQL Server};Server=MP\\SQLEXPRESS;Database=MP;Trusted_Connection=Yes;"
+)
+
+pred_data <- claims_data[, c("policy_id", "pred_logit", "pred_rf")]
+pred_data$policy_id <- as.character(pred_data$policy_id)
+
+sqlQuery(conn, "DELETE FROM dbo.claims_predictions;")
+
+sqlSave(
+  conn,
+  pred_data,
+  tablename = "[dbo].[claims_predictions]",
+  rownames = FALSE,
+  append = TRUE
+)
+
+close(conn)
