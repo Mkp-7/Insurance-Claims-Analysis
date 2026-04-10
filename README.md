@@ -76,8 +76,8 @@ End-to-end workflow on 58,000+ insurance policy records covering data cleaning, 
 ---
 
 ## Notes
-- The dashboard project focuses on descriptive analytics.
-- The predictive project focuses on data processing and modeling.
+- The dashboard  focuses on descriptive analytics.
+- The predictive model focuses on data processing and modeling.
 
 ---
 
