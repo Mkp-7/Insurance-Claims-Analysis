@@ -1,0 +1,146 @@
+-- Insurance Claims Analytics Pipeline
+-- Database: MP
+-- Dataset: ~58,000 policy records
+
+
+USE MP;
+GO
+
+1. CLEANED BASE TABLE
+
+
+IF OBJECT_ID('dbo.claims_cleaned', 'U') IS NOT NULL
+    DROP TABLE dbo.claims_cleaned;
+GO
+
+SELECT 
+    policy_id,
+    policy_tenure,
+    age_of_car,
+    age_of_policyholder,
+    area_cluster,
+    population_density,
+    make,
+    segment,
+    model,
+    fuel_type,
+    engine_type,
+    airbags,
+    transmission_type,
+    steering_type,
+    ncap_rating,
+    is_claim
+
+    -- Feature Engineering
+
+    CASE 
+        WHEN fuel_type IN ('Petrol', 'Diesel') THEN fuel_type
+        ELSE 'Other'
+    END AS fuel_type_clean,
+
+    CASE 
+        WHEN transmission_type IN ('Manual', 'Automatic') THEN transmission_type
+        ELSE 'Other'
+    END AS transmission_clean,
+
+    -- Age Buckets (for BI analysis)
+    CASE 
+        WHEN age_of_policyholder < 0.25 THEN 'Young'
+        WHEN age_of_policyholder < 0.50 THEN 'Adult'
+        WHEN age_of_policyholder < 0.75 THEN 'Middle'
+        ELSE 'Senior'
+    END AS policyholder_age_band,
+
+    CASE 
+        WHEN age_of_car < 0.25 THEN 'New'
+        WHEN age_of_car < 0.50 THEN 'Moderate'
+        ELSE 'Old'
+    END AS car_age_band
+
+INTO dbo.claims_cleaned
+FROM dbo.claims_raw;
+GO
+
+2. CLAIMS PREDICTION TABLE
+
+
+IF OBJECT_ID('dbo.claims_predictions', 'U') IS NOT NULL
+    DROP TABLE dbo.claims_predictions;
+GO
+
+CREATE TABLE dbo.claims_predictions (
+    policy_id VARCHAR(255),
+    pred_logit FLOAT,
+    pred_rf FLOAT
+);
+GO
+
+3. KPI TABLES FOR POWER BI
+
+-- KPI 1: Claim Rate by Segment
+IF OBJECT_ID('dbo.kpi_claim_by_segment', 'U') IS NOT NULL
+    DROP TABLE dbo.kpi_claim_by_segment;
+
+SELECT 
+    segment,
+    COUNT(*) AS total_policies,
+    SUM(CAST(is_claim AS INT)) AS total_claims,
+    CAST(SUM(CAST(is_claim AS INT)) * 1.0 / COUNT(*) AS FLOAT) AS claim_rate
+INTO dbo.kpi_claim_by_segment
+FROM dbo.claims_cleaned
+GROUP BY segment;
+GO
+
+-- KPI 2: Claim Rate by Fuel Type
+IF OBJECT_ID('dbo.kpi_claim_by_fuel', 'U') IS NOT NULL
+    DROP TABLE dbo.kpi_claim_by_fuel;
+
+SELECT 
+    fuel_type_clean,
+    COUNT(*) AS total_policies,
+    SUM(CAST(is_claim AS INT)) AS total_claims,
+    CAST(SUM(CAST(is_claim AS INT)) * 1.0 / COUNT(*) AS FLOAT) AS claim_rate
+INTO dbo.kpi_claim_by_fuel
+FROM dbo.claims_cleaned
+GROUP BY fuel_type_clean;
+GO
+
+-- KPI 3: Claim Rate by Transmission
+IF OBJECT_ID('dbo.kpi_claim_by_transmission', 'U') IS NOT NULL
+    DROP TABLE dbo.kpi_claim_by_transmission;
+
+SELECT 
+    transmission_clean,
+    COUNT(*) AS total_policies,
+    SUM(CAST(is_claim AS INT)) AS total_claims,
+    CAST(SUM(CAST(is_claim AS INT)) * 1.0 / COUNT(*) AS FLOAT) AS claim_rate
+INTO dbo.kpi_claim_by_transmission
+FROM dbo.claims_cleaned
+GROUP BY transmission_clean;
+GO
+
+-- KPI 4: Claim Rate by Age Bands
+IF OBJECT_ID('dbo.kpi_claim_by_age', 'U') IS NOT NULL
+    DROP TABLE dbo.kpi_claim_by_age;
+
+SELECT 
+    policyholder_age_band,
+    COUNT(*) AS total_policies,
+    SUM(CAST(is_claim AS INT)) AS total_claims,
+    CAST(SUM(CAST(is_claim AS INT)) * 1.0 / COUNT(*) AS FLOAT) AS claim_rate
+INTO dbo.kpi_claim_by_age
+FROM dbo.claims_cleaned
+GROUP BY policyholder_age_band;
+GO
+
+4. VALIDATION QUERIES (FOR TESTING)
+
+
+SELECT TOP 10 * FROM dbo.claims_cleaned;
+SELECT TOP 10 * FROM dbo.claims_predictions;
+
+SELECT * FROM dbo.kpi_claim_by_segment;
+SELECT * FROM dbo.kpi_claim_by_fuel;
+SELECT * FROM dbo.kpi_claim_by_transmission;
+SELECT * FROM dbo.kpi_claim_by_age;
+GO
