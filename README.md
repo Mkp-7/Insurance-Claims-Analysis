@@ -4,13 +4,14 @@ This repository contains two independent projects focused on insurance claims an
 
 ---
 
-## 📊 Project 1: Claims Dashboard
+## Project 1: Claims Dashboard
 
 **Folder:** `Claims Dashboard/`  
 **Files:**  
 - Insurance_Claims_Analysis.pbix  
 - claims_data.csv  
-
+- Guide.md
+  
 ### Overview
 Power BI dashboard built on a dataset of 1000 insurance claims to analyze patterns in customer profiles, incidents, and vehicle characteristics.
 
@@ -26,7 +27,7 @@ Power BI dashboard built on a dataset of 1000 insurance claims to analyze patter
 
 ---
 
-## 🤖 Project 2: Predictive Analysis
+## Project 2: Predictive Analysis
 
 **Folder:** `Predictive Analysis/`  
 **Files:**  
@@ -41,7 +42,7 @@ End-to-end workflow on 58,000+ insurance policy records covering data cleaning, 
 
 ---
 
-### 🔹 Workflow
+### Workflow
 
 #### 1. Data Preparation (SQL Server)
 - Imported raw data into SQL Server
@@ -57,7 +58,7 @@ End-to-end workflow on 58,000+ insurance policy records covering data cleaning, 
   - Segment and fuel type
 - Generated plots to understand relationships with claim occurrence
 
-📊 Statistical plots are included in this folder.
+Statistical plots are included in this folder.
 
 #### 3. Predictive Modeling (R)
 - Built models to predict `is_claim`:
@@ -81,7 +82,7 @@ End-to-end workflow on 58,000+ insurance policy records covering data cleaning, 
 
 ---
 
-## 🛠️ Tools Used
+## Tools Used
 
 - SQL Server
 - R (randomForest, glm)
@@ -89,7 +90,7 @@ End-to-end workflow on 58,000+ insurance policy records covering data cleaning, 
 
 ---
 
-## 📌 Summary
+## Summary
 
 - Claims Dashboard → Business intelligence and visualization  
 - Predictive Analysis → Data processing and predictive modeling  
