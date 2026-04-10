@@ -1,14 +1,14 @@
-# 📊 Insurance Claims Dashboard  
+# Insurance Claims Dashboard  
 ### Power BI Case Study | Claims Analysis | Customer & Vehicle Insights  
 
 ---
 
-## 🔍 Project Overview  
+## Project Overview  
 This project analyzes insurance claims data to explore patterns across customer demographics, incidents, and vehicle characteristics using an interactive Power BI dashboard.
 
 ---
 
-## 🚀 Key Objectives  
+## Key Objectives  
 - Analyze claim distribution across customer and incident attributes  
 - Identify patterns by vehicle type, age, and model  
 - Explore relationships between claim amount, severity, and timing  
@@ -16,7 +16,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-## 📂 Dataset & Data Modeling  
+## Dataset & Data Modeling  
 - Dataset: ~1000 insurance claim records  
 
 - Features include:  
@@ -31,9 +31,9 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-## 📊 Power BI Pages & Features  
+## Power BI Pages & Features  
 
-### 🔹 1. Overview  
+### 1. Overview  
 - Total claims and average claim amount  
 - Distribution of claims across states  
 - Claim trends by vehicle age  
@@ -43,7 +43,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-### 🔹 2. Customer Profile  
+### 2. Customer Profile  
 - Claims by age, gender, and occupation  
 - Customer segmentation based on demographics  
 - Relationship between customer attributes and claim behavior  
@@ -52,7 +52,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-### 🔹 3. Claims & Incidents  
+### 3. Claims & Incidents  
 - Claims by incident type and severity  
 - Distribution by time of day  
 - Analysis of damage and reporting patterns  
@@ -61,7 +61,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-### 🔹 4. Vehicle Analysis  
+### 4. Vehicle Analysis  
 - Claims by vehicle make and model  
 - Vehicle age vs claim trends  
 - Distribution of claims across different vehicle categories  
@@ -70,7 +70,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-### 🔹 5. Risk / Fraud Indicators  
+### 5. Risk / Fraud Indicators  
 - Comparison of claims across customer and policy attributes  
 - Identification of segments with relatively higher claim frequency  
 - Analysis of patterns in incident types and reporting behavior  
@@ -79,7 +79,7 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-## 📈 Key Observations  
+## Key Observations  
 - Claim patterns vary across customer demographics and vehicle types  
 - Certain incident types contribute more to total claim amounts  
 - Vehicle age shows variation in claim distribution  
@@ -87,29 +87,29 @@ This project analyzes insurance claims data to explore patterns across customer 
 
 ---
 
-## 🛠️ How to Use the Dashboard  
+## How to Use the Dashboard  
 1. Open the `.pbix` file in Power BI Desktop  
 2. Use filters (age, gender, incident type, etc.) to explore data  
 3. Navigate across pages using tabs or buttons  
 
 ---
 
-## 📥 Files  
+## Files  
 - `Insurance_Claims_Analysis.pbix` → Power BI dashboard  
 - `claims_data.csv` → Source dataset  
 
 ---
 
-## 💡 Project Scope  
+## Project Scope  
 This project focuses on descriptive analytics and visualization of insurance claims data to support exploratory analysis and pattern identification.
 
 ---
 
-## 🧰 Tools Used  
+## Tools Used  
 - Power BI  
 - DAX  
 
 ---
 
-## 📌 Summary  
+## Summary  
 This dashboard provides a structured way to explore insurance claims data, enabling analysis across customer, incident, and vehicle dimensions through interactive visuals.
