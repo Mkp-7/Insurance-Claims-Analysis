@@ -5,7 +5,8 @@
 
 ## 🔍 Project Overview  
 This project analyzes insurance claims data to explore patterns across customer demographics, incidents, and vehicle characteristics using an interactive Power BI dashboard.
-![Overview](Insurance-Claims-Analysis/Claims Dashboard/Images/Overview.png)
+<img width="1157" height="651" alt="Screenshot 2026-04-10 094718" src="https://github.com/user-attachments/assets/4f262636-cc38-4036-9186-27e02fd29c50" />
+
 ---
 
 ## 🚀 Key Objectives  
