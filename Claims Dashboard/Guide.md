@@ -6,8 +6,6 @@
 ## 🔍 Project Overview  
 This project analyzes insurance claims data to explore patterns across customer demographics, incidents, and vehicle characteristics using an interactive Power BI dashboard.
 
-<img width="1157" height="651" alt="Screenshot 2026-04-10 094718" src="https://github.com/user-attachments/assets/4f262636-cc38-4036-9186-27e02fd29c50" />
-
 ---
 
 ## 🚀 Key Objectives  
@@ -40,6 +38,8 @@ This project analyzes insurance claims data to explore patterns across customer 
 - Distribution of claims across states  
 - Claim trends by vehicle age  
 - Summary view of key metrics  
+
+<img width="1157" height="651" alt="Screenshot 2026-04-10 094718" src="https://github.com/user-attachments/assets/4f262636-cc38-4036-9186-27e02fd29c50" />
 
 ---
 
@@ -74,6 +74,8 @@ This project analyzes insurance claims data to explore patterns across customer 
 - Comparison of claims across customer and policy attributes  
 - Identification of segments with relatively higher claim frequency  
 - Analysis of patterns in incident types and reporting behavior  
+
+<img width="1153" height="652" alt="Screenshot 2026-04-10 094613" src="https://github.com/user-attachments/assets/83e2a259-3a53-464c-866d-a575cf18f90e" />
 
 ---
 
